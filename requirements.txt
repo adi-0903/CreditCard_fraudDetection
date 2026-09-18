@@ -1,0 +1,11 @@
+tensorflow>=2.0.0
+keras>=3.0.0
+pandas>=2.0.0
+numpy
+scikit-learn
+matplotlib
+seaborn
+scipy
+tensorboard
+h5py
+notebook
