@@ -2,6 +2,7 @@ import time
 import numpy as np
 import pandas as pd
 
+
 def run_benchmark():
     # Test dataset size in fraud_detection notebook (20% of 284,807 transactions = ~56,962 rows)
     n_samples = 56962
@@ -9,16 +10,18 @@ def run_benchmark():
 
     # Generate representative reconstruction error values
     np.random.seed(42)
-    error_df = pd.DataFrame({
-        'reconstruction_error': np.random.exponential(scale=1.5, size=n_samples)
-    })
+    error_df = pd.DataFrame(
+        {"reconstruction_error": np.random.exponential(scale=1.5, size=n_samples)}
+    )
 
     iterations = 500
 
     # 1. Baseline: List comprehension
     start_time = time.perf_counter()
     for _ in range(iterations):
-        y_pred_list = [1 if e > threshold else 0 for e in error_df.reconstruction_error.values]
+        y_pred_list = [
+            1 if e > threshold else 0 for e in error_df.reconstruction_error.values
+        ]
     baseline_total = time.perf_counter() - start_time
     baseline_avg_ms = (baseline_total / iterations) * 1000
 
@@ -42,5 +45,6 @@ def run_benchmark():
     print(f"Speedup                        : {speedup:.2f}x faster")
     print(f"Latency Reduction              : {pct_reduction:.2f}%")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_benchmark()
